@@ -2,6 +2,8 @@ import os
 from selene.support.shared import browser
 from selene.support.conditions import have
 
+from lesson_10.helpers.users import olga
+
 
 class RegistrationPage:
 
@@ -69,7 +71,7 @@ class RegistrationPage:
             have.exact_text(text)
         )
 
-    def should_registered_user(self, full_name, email,mobile, date_of_birth, subject, picture, current_address, state_and_city):
+    def should_info(self, full_name, email,mobile, date_of_birth, subject, picture, current_address, state_and_city):
         browser.element('.table').all('td').even.should(
             have.exact_texts(
                 full_name,
@@ -83,3 +85,32 @@ class RegistrationPage:
             )
         )
         return self
+
+    def registration(self):
+        self.open()
+        self.fill_first_name(olga.full_name[0])
+        self.fill_last_name(olga.full_name[1])
+        self.fill_email(olga.email)
+        self.choose_gender()
+        self.fill_mobile(olga.mobile)
+        self.fill_date_of_birth(olga.date_of_birth)
+        self.fill_subject(olga.subject)
+        self.choose_hobbies()
+        self.upload_picture(olga.picture)
+        self.fill_current_address(olga.current_address)
+        self.fill_state(olga.state)
+        self.fill_city(olga.city)
+        self.submit()
+
+    def should_registered_user(self):
+        self.should_info(f"{olga.full_name[0]} {olga.full_name[1]}",
+                         olga.email,
+                         olga.mobile,
+                         olga.date_of_birth,
+                         olga.subject,
+                         olga.picture,
+                         olga.current_address,
+                         f"{olga.state} {olga.city}")
+
+
+
