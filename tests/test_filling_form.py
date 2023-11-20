@@ -6,8 +6,3 @@ def test_filling_form():
     registration_page.registration()
     registration_page.should_registered_user()
 
-
-
-
-
-

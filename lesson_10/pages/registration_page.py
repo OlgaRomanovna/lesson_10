@@ -1,8 +1,7 @@
-import os
 from selene.support.shared import browser
 from selene.support.conditions import have
-
-from lesson_10.helpers.users import olga
+from tests.helpers import resourses
+from tests.helpers.users import olga
 
 
 class RegistrationPage:
@@ -19,41 +18,32 @@ class RegistrationPage:
     def fill_email(self, email):
         browser.element("#userEmail").type(email)
 
-    def choose_gender(self):
-        browser.element(
-            'div.col-md-9.col-sm-12 > div:nth-child(2) > [for="gender-radio-2"]'
-        ).click()
+    def choose_gender(self, gender):
+        browser.all('.custom-radio').element_by(have.text(gender)).click()
 
     def fill_mobile(self, mobile):
         browser.element("#userNumber").type(mobile)
 
-    def fill_date_of_birth(self, date_of_birth):
-        browser.element("#dateOfBirthInput").click()
-        browser.element(".react-datepicker__month-select").click().all("option").element_by(
-            have.exact_text("April")
-        ).click()
-        browser.element(".react-datepicker__year-select").click().all("option").element_by(
-            have.exact_text("1995")
-        ).click()
-        browser.element(f'[aria-label="Choose Sunday, {date_of_birth}"]').click()
+    def fill_date_of_birth(self):
+        browser.element('#dateOfBirthInput').click()
+        browser.element('.react-datepicker__month-select').send_keys(olga.date_of_birth.strftime('%B'))
+        browser.element('.react-datepicker__year-select').send_keys(olga.date_of_birth.year)
+        browser.element(f'.react-datepicker__day--0{olga.date_of_birth.strftime("%d")}').click()
 
     def fill_subject(self, subject):
         browser.element("#subjectsInput").type(subject).press_enter()
 
     def choose_hobbies(self):
-        browser.element(
-            'div.col-md-9.col-sm-12 > div:nth-child(2) > [for="hobbies-checkbox-2"]'
-        ).click()
+        browser.element('div.col-md-9.col-sm-12 > div:nth-child(2) > [for="hobbies-checkbox-2"]').click()
 
     def upload_picture(self, picture):
-        browser.element("#uploadPicture").send_keys(os.path.abspath(f"helpers/{picture}"))
+        browser.element("#uploadPicture").send_keys(resourses.path(picture))
 
     def fill_current_address(self, current_address):
         browser.element("#currentAddress").type(current_address)
         browser.execute_script("window.scrollTo(0, 500)")
 
     def fill_state(self, state):
-
         browser.element("#state").click().all('[id^="react-select-3-option"]').element_by(
             have.exact_text(state)
         ).click()
@@ -71,29 +61,14 @@ class RegistrationPage:
             have.exact_text(text)
         )
 
-    def should_info(self, full_name, email,mobile, date_of_birth, subject, picture, current_address, state_and_city):
-        browser.element('.table').all('td').even.should(
-            have.exact_texts(
-                full_name,
-                email,
-                mobile,
-                date_of_birth,
-                subject,
-                picture,
-                current_address,
-                state_and_city
-            )
-        )
-        return self
-
     def registration(self):
         self.open()
         self.fill_first_name(olga.full_name[0])
         self.fill_last_name(olga.full_name[1])
         self.fill_email(olga.email)
-        self.choose_gender()
+        self.choose_gender(olga.gender)
         self.fill_mobile(olga.mobile)
-        self.fill_date_of_birth(olga.date_of_birth)
+        self.fill_date_of_birth()
         self.fill_subject(olga.subject)
         self.choose_hobbies()
         self.upload_picture(olga.picture)
@@ -103,14 +78,16 @@ class RegistrationPage:
         self.submit()
 
     def should_registered_user(self):
-        self.should_info(f"{olga.full_name[0]} {olga.full_name[1]}",
-                         olga.email,
-                         olga.mobile,
-                         olga.date_of_birth,
-                         olga.subject,
-                         olga.picture,
-                         olga.current_address,
-                         f"{olga.state} {olga.city}")
-
-
-
+        browser.element('.table').all('td').even.should(
+            have.exact_texts(f"{olga.full_name[0]} {olga.full_name[1]}",
+                             f"{olga.email}",
+                             f"{olga.gender}",
+                             f"{olga.mobile}",
+                             '{0} {1},{2}'.format(
+                                 olga.date_of_birth.strftime("%d"), olga.date_of_birth.strftime("%B"),
+                                 olga.date_of_birth.strftime("%Y")),
+                             f"{olga.subject}",
+                             f"{olga.hobbies}",
+                             f"{olga.picture}",
+                             f"{olga.current_address}",
+                             f"{olga.state} {olga.city}"))
