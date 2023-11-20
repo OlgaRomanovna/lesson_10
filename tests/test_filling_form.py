@@ -22,7 +22,7 @@ def test_filling_form():
                                              "olgaN@mail.ru",
                                              "Female",
                                              "9999999999",
-                                             "April 9th, 1995",
+                                             "09 April,1995",
                                              "Biology",
                                              "Reading",
                                              "cat.jpeg",
