@@ -2,6 +2,8 @@ import os
 from selene import browser
 from selene.support.conditions import have
 
+from tests.helpers.resources import path
+
 
 class RegistrationPage:
 
@@ -44,7 +46,7 @@ class RegistrationPage:
         ).click()
 
     def upload_picture(self, picture):
-        browser.element("#uploadPicture").send_keys(os.path.abspath(f"helpers/{picture}"))
+        browser.element("#uploadPicture").send_keys(path(picture))
 
     def fill_current_address(self, current_address):
         browser.element("#currentAddress").type(current_address)
