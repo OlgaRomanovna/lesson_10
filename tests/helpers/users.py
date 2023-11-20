@@ -18,5 +18,5 @@ class User:
 
 
 olga = User(full_name=['Olga', 'N'], email='o.romanovna@gmail.com', gender='Female', mobile=9999999999,
-            date_of_birth=datetime.date(day=9, month=4, year=1995), subject="Biology", hobbies="Reding", picture="cat.jpeg",
+            date_of_birth=datetime.date(day=9, month=4, year=1995), subject="Biology", hobbies="Reading", picture="cat.jpeg",
             current_address="Krasnodar", state="Haryana", city="Karnal")
