@@ -20,9 +20,11 @@ def test_filling_form():
     registration_page.text_should_successful("Thanks for submitting the form")
     registration_page.should_registered_user("Olga N",
                                              "olgaN@mail.ru",
+                                             "Female",
                                              "9999999999",
                                              "April 9th, 1995",
-                                             "B",
+                                             "Biology",
+                                             "Reading",
                                              "cat.jpeg",
                                              "Krasnodar",
                                              "Haryana Karnal")

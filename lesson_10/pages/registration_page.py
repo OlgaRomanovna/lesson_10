@@ -1,5 +1,5 @@
 import os
-from selene.support.shared import browser
+from selene import browser
 from selene.support.conditions import have
 
 
@@ -69,14 +69,17 @@ class RegistrationPage:
             have.exact_text(text)
         )
 
-    def should_registered_user(self, full_name, email,mobile, date_of_birth, subject, picture, current_address, state_and_city):
+    def should_registered_user(self, full_name, email, gender, mobile, date_of_birth, subject,
+                               hobbies, picture, current_address, state_and_city):
         browser.element('.table').all('td').even.should(
             have.exact_texts(
                 full_name,
                 email,
+                gender,
                 mobile,
                 date_of_birth,
                 subject,
+                hobbies,
                 picture,
                 current_address,
                 state_and_city
