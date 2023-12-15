@@ -1,4 +1,4 @@
-from lesson_10.pages.registration_page import RegistrationPage
+from lesson_10_12.pages.registration_page import RegistrationPage
 
 
 def test_filling_form():
