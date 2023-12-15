@@ -1,7 +1,5 @@
-import os
-from selene import browser
 from selene.support.conditions import have
-
+from selene.support.shared import browser
 from tests.helpers.resources import path
 
 
