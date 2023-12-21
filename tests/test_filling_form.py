@@ -14,8 +14,8 @@ def test_filling_form():
     registration_page.choose_hobbies()
     registration_page.upload_picture("cat.jpeg")
     registration_page.fill_current_address("Krasnodar")
-    registration_page.fill_state("Haryana")
-    registration_page.fill_city("Karnal")
+    registration_page.fill_state("NCR")
+    registration_page.fill_city("Delhi")
     registration_page.submit()
     registration_page.text_should_successful("Thanks for submitting the form")
     registration_page.should_registered_user("Olga N",
@@ -27,7 +27,7 @@ def test_filling_form():
                                              "Reading",
                                              "cat.jpeg",
                                              "Krasnodar",
-                                             "Haryana Karnal")
+                                             "NCR Delhi")
 
 
 

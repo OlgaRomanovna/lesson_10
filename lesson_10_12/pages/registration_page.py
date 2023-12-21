@@ -57,9 +57,7 @@ class RegistrationPage:
         ).click()
 
     def fill_city(self, city):
-        browser.element("#city").click().all('[id^="react-select-4-option"]').element_by(
-            have.exact_text(city)
-        ).click()
+        browser.element('#react-select-4-input').type(city).press_enter()
 
     def submit(self):
         browser.element("#userNumber").press_enter()
