@@ -1,7 +1,7 @@
 from lesson_10_12.pages.registration_page import RegistrationPage
 
 
-def test_filling_form(setup_browser):
+def test_filling_form():
     registration_page = RegistrationPage()
     registration_page.open()
     registration_page.fill_first_name("Olga")
