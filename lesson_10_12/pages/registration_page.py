@@ -63,7 +63,7 @@ class RegistrationPage:
             browser.execute_script("window.scrollTo(0, 500)")
 
     def fill_state(self, state):
-        with allure.step("Заполнение поля Штат"):
+        with allure.step("Заполнение поля Страна"):
             browser.element("#state").click().all('[id^="react-select-3-option"]').element_by(
             have.exact_text(state)
         ).click()
